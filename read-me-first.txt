@@ -1,0 +1,14 @@
+build solution with docker-desktop
+**************************************
+
+docker-compose down
+docker-compose up --build
+
+
+# redis-cli
+KEYS *
+GET název_tvého_úkolu
+SET pokus "funguje to"
+
+http://localhost:8080/save/date
+http://localhost:8080/list/date
