@@ -1,0 +1,16 @@
+services:
+  api:
+    image: smarttasks-api
+    build:
+      context: .
+      # path to Dockerfile
+      dockerfile: SmartTasks/Dockerfile 
+    ports:
+      - "8080:8080"
+    depends_on:
+      - cache
+
+  cache:
+    image: redis:latest
+    ports:
+      - "6379:6379"
