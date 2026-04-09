@@ -4,7 +4,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>72f6a79a-53a5-420a-814d-7a32b9066601</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceUrl>http://localhost:8080/scalar/v1</DockerServiceUrl>
     <DockerServiceName>api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
