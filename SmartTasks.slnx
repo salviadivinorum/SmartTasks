@@ -2,5 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path="docker-compose.yml" />
   </Folder>
+  <Project Path="docker-compose.dcproj" Id="72f6a79a-53a5-420a-814d-7a32b9066601">
+    <Build />
+  </Project>
   <Project Path="SmartTasks/SmartTasks.csproj" />
 </Solution>
