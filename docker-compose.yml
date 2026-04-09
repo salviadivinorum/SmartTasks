@@ -3,12 +3,13 @@ services:
     image: smarttasks-api
     build:
       context: .
-      # path to Dockerfile
-      dockerfile: SmartTasks/Dockerfile 
+      dockerfile: SmartTasks/Dockerfile   
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development      
     ports:
       - "8080:8080"
     depends_on:
-      - cache
+      - cache    
 
   cache:
     image: redis:latest
