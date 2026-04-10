@@ -1,13 +1,14 @@
 # SmartTasks
-A simple Web API that utilizes Docker + Redis database
+A simple Web API + FE that utilizes Docker + Redis database
 
 usage:
 
-save the key with current time satmp to Redis DB
+Blazor frontend displaying task in FE
+http://localhost:5000
+**************************************************
 
-http://localhost:8080/save/date
-
-
-get the key timestamp
-
-http://localhost:8080/list/date
+API backend - Scalar documantation and other GETs
+http://localhost:8080/scalar/v1
+http://localhost:8080/env
+http://localhost:8080
+****************************************************
