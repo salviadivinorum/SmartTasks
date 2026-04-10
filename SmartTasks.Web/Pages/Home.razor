@@ -1,13 +1,14 @@
 ﻿@page "/"
 @inject HttpClient Http
 
-<PageTitle>Moje Úkoly</PageTitle>
+<PageTitle>My Smart Tasks</PageTitle>
 
-<h1>Seznam úkolů z Redisu</h1>
+<h1>List of Redis Tasks</h1>
+<button class="btn btn-primary mb-3" @onclick="RefreshTasks">Refresh the list</button>
 
 @if (tasks == null)
 {
-    <p><em>Načítám úkoly...</em></p>
+    <p><em>Loading tasks...</em></p>
 }
 else
 {
@@ -25,6 +26,11 @@ else
     protected override async Task OnInitializedAsync()
     {
         // call my API endpoint to list all keys via nginx proxy
+        tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
+    }
+
+    private async Task RefreshTasks()
+    {
         tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
     }
 }
