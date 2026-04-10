@@ -18,3 +18,12 @@ Scalar documantation and other GETs
 http://localhost:8080/scalar/v1
 http://localhost:8080/env
 http://localhost:8080
+
+*****************************************************
+Blazor frontend displaying task in FE
+http://localhost:5000
+
+API backend only:
+http://localhost:8080
+****************************************************
+

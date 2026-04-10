@@ -1,18 +1,18 @@
-﻿# 1. Fáze: Sestavení (Build)
+﻿# 1. Build stage: Use the .NET SDK image to build the application
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# Kopírování souborů projektu a restaurování
+# Copy the project file and restore dependencies
 COPY ["SmartTasks.Web/SmartTasks.Web.csproj", "SmartTasks.Web/"]
 RUN dotnet restore "SmartTasks.Web/SmartTasks.Web.csproj"
 
-# Kopírování zbytku a publikace
+# Copy the entire source code and publish the application
 COPY . .
 WORKDIR "/src/SmartTasks.Web"
 RUN dotnet publish "SmartTasks.Web.csproj" -c Release -o /app/publish
 
-# 2. Fáze: Spuštění (Runtime)
-# Použijeme nginx, protože Blazor WASM jsou jen statické soubory
+# 2. Runtime stage
+# we will use nginx because Blazor WASM is just static files
 FROM nginx:alpine
 WORKDIR /usr/share/nginx/html
 COPY --from=build /app/publish/wwwroot .

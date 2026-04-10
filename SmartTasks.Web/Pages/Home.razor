@@ -24,7 +24,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        // Zavolá tvůj endpoint pro výpis všech klíčů přes nginx proxy
+        // call my API endpoint to list all keys via nginx proxy
         tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
     }
 }
