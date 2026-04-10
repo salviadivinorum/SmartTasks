@@ -5,5 +5,6 @@
   <Project Path="docker-compose.dcproj" Id="72f6a79a-53a5-420a-814d-7a32b9066601">
     <Build />
   </Project>
+  <Project Path="SmartTasks.Web/SmartTasks.Web.csproj" Id="f46efa3d-f0be-4c54-a485-e5eb3321b92d" />
   <Project Path="SmartTasks/SmartTasks.csproj" />
 </Solution>

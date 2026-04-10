@@ -11,7 +11,18 @@ builder.Services.AddEndpointsApiExplorer();
 var redis = ConnectionMultiplexer.Connect("cache:6379");
 builder.Services.AddSingleton<IConnectionMultiplexer>(redis);
 
+// CORS - in development we allow everything
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
+
+app.UseCors(); // activate CORS!
 
 if (app.Environment.IsDevelopment())
 {

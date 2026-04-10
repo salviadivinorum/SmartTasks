@@ -1,0 +1,30 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Moje Úkoly</PageTitle>
+
+<h1>Seznam úkolů z Redisu</h1>
+
+@if (tasks == null)
+{
+    <p><em>Načítám úkoly...</em></p>
+}
+else
+{
+    <ul>
+        @foreach (var task in tasks)
+        {
+            <li><strong>@task.Key:</strong> @task.Value</li>
+        }
+    </ul>
+}
+
+@code {
+    private Dictionary<string, string>? tasks;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Zavolá tvůj endpoint pro výpis všech klíčů přes nginx proxy
+        tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
+    }
+}
