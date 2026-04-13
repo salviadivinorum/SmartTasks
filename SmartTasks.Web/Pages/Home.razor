@@ -1,14 +1,22 @@
 ﻿@page "/"
 @inject HttpClient Http
 
-<PageTitle>My Smart Tasks</PageTitle>
+<PageTitle>SmartTasks - Manager</PageTitle>
 
-<h1>List of Redis Tasks</h1>
-<button class="btn btn-primary mb-3" @onclick="RefreshTasks">Refresh the list</button>
+<h1>My tasks</h1>
+
+<div style="background: #f4f4f4; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+    <h3>Add new task</h3>
+    <input @bind="newTaskName" placeholder="Task name" />
+    <input @bind="newTaskDesc" placeholder="Task description" />
+    <button @onclick="SaveTask" class="btn btn-success">Save to Redis</button>
+</div>
+
+<hr />
 
 @if (tasks == null)
 {
-    <p><em>Loading tasks...</em></p>
+    <p><em>Loading...</em></p>
 }
 else
 {
@@ -22,15 +30,31 @@ else
 
 @code {
     private Dictionary<string, string>? tasks;
+    
+    private string newTaskName = "";
+    private string newTaskDesc = "";
 
     protected override async Task OnInitializedAsync()
     {
-        // call my API endpoint to list all keys via nginx proxy
-        tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
+        await LoadTasks();
     }
 
-    private async Task RefreshTasks()
+    private async Task LoadTasks()
     {
-        tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/api/");
+        tasks = await Http.GetFromJsonAsync<Dictionary<string, string>>("/");
+    }
+
+    private async Task SaveTask()
+    {
+        var model = new { Name = newTaskName, Description = newTaskDesc };
+
+        var response = await Http.PostAsJsonAsync("/save", model);
+
+        if (response.IsSuccessStatusCode)
+        {
+            newTaskName = "";
+            newTaskDesc = "";
+            await LoadTasks();
+        }
     }
 }
