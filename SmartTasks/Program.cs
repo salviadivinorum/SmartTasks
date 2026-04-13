@@ -68,7 +68,7 @@ app.MapGet("/", async (IConnectionMultiplexer redisControl) =>
         results.Add(key.ToString(), value.ToString());
     }
 
-    return results.Any() ? Results.Ok(results) : Results.Content("Redis is empty.");
+    return Results.Ok(results);
 });
 
 // 5. Delete by IConnectionMultiplexer
